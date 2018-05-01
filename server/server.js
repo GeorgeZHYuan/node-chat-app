@@ -18,10 +18,10 @@ io.on('connection', (socket) => {
     socket.on('createMessage', (message) => {
         console.log(message);
 
-        socket.emit('newMessage', {
-            from: 'Demiurge',
-            text: 'Sasuga Ainz-sama',
-            createAt: 123
+        io.emit('newMessage', {
+            from: message.from,
+            text: message.text,
+            createAt: new Date().getTime()
         });
     });
 
