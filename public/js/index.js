@@ -17,11 +17,15 @@ socket.on('newMessage', function(message) {
 
 jQuery('#message-form').on('submit', function(e) {
     e.preventDefault();
+    var messageTextbox = jQuery('[name=message]');
+    var sendButton = jQuery('[name=message-button]');
+    sendButton.attr('disabled', 'disabled');
 
     socket.emit('createMessage', {
         from: 'User',
-        text: jQuery('[name=message]').val()
+        text: messageTextbox.val()
     }, function () {
-
+        messageTextbox.val('');
+        sendButton.removeAttr('disabled');
     });
 });
